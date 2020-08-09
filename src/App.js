@@ -7,7 +7,8 @@ import{
 import PrivateRoute from './components/PrivateRoute';
 import ControlScreen from "./components/ControlScreen";
 import Login from "./components/Login";
-import Register from './components/Register'
+import Register from './components/Register';
+import MainScreen from './components/MainScreen';
 import { AuthContext } from './context/auth';
 import './App.css';
 
@@ -25,7 +26,7 @@ function App(props){
                         <Switch>
                             <Route exact path="/" component={Login}/>
                             <Route path="/register" component={Register} />
-                            <PrivateRoute exact path="/activity" component={ControlScreen}/>
+                            <PrivateRoute exact path="/activity" component={MainScreen}/>
                         </Switch>
                     </div>
                 </Router>

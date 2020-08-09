@@ -16,6 +16,8 @@ export default function Register() {
     const [isLoggedIn, setLoggedIn] = useState(false);
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
+    const [deviceId, setDeviceId] = useState('');
+    const [token, setToken] = useState('');
     const { setAuthTokens } = useAuth();
 
     function createAccount() {
@@ -26,6 +28,7 @@ export default function Register() {
                 function(data) {
                     const x = data.body.access_token;
                     setAuthTokens(x);
+                    setToken(x);
                     setLoggedIn(true);
                 },
                 function(err) {
@@ -33,6 +36,13 @@ export default function Register() {
                 }
             );
         })
+
+        particle.claimDevice({deviceId: deviceId, auth: token}).then(
+            function(data) {
+            }, function(err){
+                    alert("Failed to claim the device");
+                }
+            )
     }
 
     if( isLoggedIn ) {
@@ -64,6 +74,16 @@ export default function Register() {
                         setPassword(e.target.value);
                     }}
                 />
+                <InputLabel style={labelStyle} htmlFor="deviceId-component">Device-Id</InputLabel>
+                <TextField
+                    style={{width: 300}}
+                    variant="outlined"
+                    id="deviceId-component"
+                    value={password}
+                    onChange={e => {
+                        setDeviceId(e.target.value);
+                    }}
+                />
                 <div>
                     <Button
                         variant="contained"
@@ -89,7 +109,7 @@ const inner={
     borderStyle: 'solid',
     borderColor: '#344ceb',
     borderRadius: 15,
-    height: 500,
+    height: 600,
     width: 375,
 }
 

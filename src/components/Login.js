@@ -34,6 +34,14 @@ export default function Login() {
              )
     }
 
+    function handleKeyPress(event){
+        console.log(event);
+        if ( event === "Enter"){
+            verifyLogin()
+        }
+
+    }
+
     if( isLoggedIn ) {
         return <Redirect to="/activity"/>;
     }
@@ -69,6 +77,7 @@ export default function Login() {
                             color="primary"
                             style={loginButton}
                             onClick={verifyLogin}
+                            onKeyPress={handleKeyPress}
                         >
                             Login
                         </Button>
